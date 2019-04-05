@@ -1,18 +1,22 @@
 import express from "express";
-import graphqlHTTP from "express-graphql";
+import expressGraphQL from "express-graphql";
 import { makeAugmentedSchema } from "neo4j-graphql-js";
+import { driver } from "./database_connector";
 import typeDefs from "./typeDefs";
 
 const app = express();
-
+const PORT = process.env.PORT || 3000;
 const schema = makeAugmentedSchema({ typeDefs });
 
 app.use(
   "/graphql",
-  graphqlHTTP({
+  expressGraphQL({
     schema,
-    graphiql: true
+    graphiql: true,
+    context: {
+      driver
+    }
   })
 );
 
-app.listen(3000);
+app.listen(PORT);

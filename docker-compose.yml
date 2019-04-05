@@ -8,12 +8,15 @@ services:
     environment:
       NEO4J_AUTH: none
     ports:
+      - "7474:7474"
       - "7687:7687"
     networks:
-      - database-network
+      - database
   backend:
     build:
       context: ./backend
+    environment:
+      PORT: 3000
     ports:
       - "3000:3000"
     volumes:
@@ -22,7 +25,7 @@ services:
     depends_on:
       - database
     networks:
-      - database-network
+      - database
   frontend:
     build:
       context: ./frontend
@@ -35,7 +38,7 @@ services:
       - backend
 
 networks:
-  database-network:
+  database:
 
 volumes:
   neo4j:
