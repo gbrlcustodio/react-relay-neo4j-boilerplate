@@ -25,6 +25,7 @@ services:
     depends_on:
       - database
     networks:
+      - backend
       - database
   frontend:
     build:
@@ -36,9 +37,12 @@ services:
       - ./frontend/node_modules:/app/node_modules
     depends_on:
       - backend
+    networks:
+      - backend
 
 networks:
   database:
+  backend:
 
 volumes:
   neo4j:
