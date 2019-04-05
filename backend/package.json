@@ -4,21 +4,21 @@
   "description": "Sets up an application an containing graphql layer over express and connecting to neo4j db",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node --presets babel-preset-env",
+    "start": "nodemon --exec babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.5",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "neo4j-graphql-js": "^2.4.2"
   },
   "devDependencies": {
+    "@babel/node": "^7.2.2",
     "nodemon": "^1.18.10"
   }
 }
