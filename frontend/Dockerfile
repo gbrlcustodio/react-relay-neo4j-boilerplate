@@ -12,6 +12,5 @@ COPY package*.json /app/
 RUN npm install
 
 COPY . /app
-RUN npm run schema && npm run relay
 
 CMD [ "npm", "run", "dev", "--", "-p", "3001" ]
