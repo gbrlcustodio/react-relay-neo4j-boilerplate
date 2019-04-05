@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  database:
+    image: neo4j
+    volumes:
+      - neo4j:/data
+    environment:
+      NEO4J_AUTH: none
+    ports:
+      - "7687:7687"
+    networks:
+      - database-network
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - ./backend/node_modules:/app/node_modules
+    depends_on:
+      - database
+    networks:
+      - database-network
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./frontend:/app
+      - ./frontend/node_modules:/app/node_modules
+    depends_on:
+      - backend
+
+networks:
+  database-network:
+
+volumes:
+  neo4j:

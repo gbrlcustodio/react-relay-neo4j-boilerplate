@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Sets up an application an containing graphql layer over express and connecting to neo4j db",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js --exec babel-node --presets babel-preset-env",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-preset-env": "^1.7.0",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "neo4j-graphql-js": "^2.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
