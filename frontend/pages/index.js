@@ -1,26 +1,9 @@
-import React, { Component } from 'react'
-import { graphql } from 'react-relay'
-import withData from '../lib/withData'
-import BlogPosts from '../components/BlogPosts'
+import React from "react";
+import BlogPosts from "../components/BlogPosts";
+import initEnvironment from "../lib/createRelayEnvironment";
 
-class Index extends Component {
-  static displayName = `Index`
+const environment = initEnvironment();
 
-  render (props) {
-    return (
-      <div>
-        <BlogPosts viewer={this.props.viewer} />
-      </div>
-    )
-  }
-}
+const Home = () => <BlogPosts environment={environment} />;
 
-export default withData(Index, {
-  query: graphql`
-    query pages_indexQuery {
-      viewer {
-        ...BlogPosts_viewer
-      }
-    }
-  `
-})
+export default Home;

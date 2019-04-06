@@ -1,29 +1,42 @@
-import React from 'react'
-import { createFragmentContainer, graphql } from 'react-relay'
-import BlogPostPreview from './BlogPostPreview'
+import React from "react";
+import { graphql, QueryRenderer } from "react-relay";
+import BlogPostPreview from "./BlogPostPreview";
 
-const BlogPosts = props => {
+const BlogPosts = ({ environment }) => {
   return (
     <div>
       <h1>Blog posts</h1>
-      {props.viewer.allBlogPosts.edges.map(({ node }) => (
-        <BlogPostPreview key={node.id} post={node} />
-      ))}
-    </div>
-  )
-}
-
-export default createFragmentContainer(BlogPosts, {
-  viewer: graphql`
-    fragment BlogPosts_viewer on Viewer {
-      allBlogPosts(first: 10, orderBy: createdAt_DESC) {
-        edges {
-          node {
-            ...BlogPostPreview_post
-            id
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query BlogPostsQuery {
+            AllBlogPosts {
+              id
+              title
+            }
           }
-        }
-      }
-    }
-  `
-})
+        `}
+        render={({ error, props }) => {
+          if (error) {
+            return <p>Error!</p>;
+          }
+
+          if (!props) {
+            return <p>Loading...</p>;
+          }
+
+          const { AllBlogPosts } = props;
+
+          return (
+            AllBlogPosts &&
+            AllBlogPosts.map(post => (
+              <BlogPostPreview key={post.id} post={post} />
+            ))
+          );
+        }}
+      />
+    </div>
+  );
+};
+
+export default BlogPosts;

@@ -1,7 +1,7 @@
-type BlogPost implements Node {
-  content: String!
-  createdAt: DateTime!
-  id: ID! @isUnique
-  title: String!
-  updatedAt: DateTime!
+type BlogPost {
+  content: String
+  createdAt: _Neo4jDateTime
+  title: String
+  updatedAt: _Neo4jDateTime
+  _id: String
 }
